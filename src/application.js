@@ -6,7 +6,7 @@ class Application {
         const page = await browser.newPage();  
         await page.setContent('<html><body><h1>Test</h1></body></html>', { waitUntil: 'domcontentloaded' });
         const pdfBuffer = await page.pdf({
-            format: 'A4',
+           // format: 'A4',
             path: './test.pdf',
             printBackground: true
         });
