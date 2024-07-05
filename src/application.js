@@ -1,17 +1,21 @@
-import puppeteer from "puppeteer";
-
+import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
 class Application {
-    static async main() {
-        const browser = await puppeteer.launch({headless: 'shell'});
-        const page = await browser.newPage();  
-        await page.setContent('<html><body><h1>Test</h1></body></html>', { waitUntil: 'domcontentloaded' });
-        const pdfBuffer = await page.pdf({
-           // format: 'A4',
-            path: './test.pdf',
-            printBackground: true
-        });
-        await browser.close()
-    }
+  static async main() {
+    const app = express();
+
+    const port = process.env.PORT;
+    app.get("/", (req, res) => {
+      res.send("Test api");
+    });
+
+    app.listen(port, () => {
+      console.log(`'App running on port ${port}...'`);
+    });
+    // const buffer = await htmlToPdf("<html><body><h1>Test</h1></body></html>");
+    // console.log("buffer", buffer);
+  }
 }
 
 export default Application;
